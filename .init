@@ -1,0 +1,58 @@
+# 防止被加载两次
+if [ -z "$_INIT_SH_LOADED" ]; then
+      _INIT_SH_LOADED=1
+else
+    return
+fi
+  
+# 非交互式则退出
+#[[ "$-" != *i* ]] && return
+case "$-" in
+	*i*) ;;
+	*) return
+esac
+
+#颜色
+export CLICOLOR=1  # 打开颜色
+export LSCOLORS=exFxcxdxexdacaecCcxfaf
+export TERM="xterm-256color"
+
+if [ -n "$ZSH_VERSION" ]; then
+	. "/Users/config/zshrc.zsh"
+	# ipython风格的上下翻历史 + history-substring-search-*
+	# [up]
+#	prefix-up-line-or-search() {
+#	    if [[ $LBUFFER == *$'\n'* ]] {
+#    	    zle .up-line
+#    	} else {
+#        	zle history-substring-search-up
+#    	}
+#	}
+#	zle -N prefix-up-line-or-search
+#	bindkey '^[[A' prefix-up-line-or-search
+
+	# [down]
+#	prefix-down-line-or-search() {
+#    	if [[ $RBUFFER == *$'\n'* ]] {
+#        	zle .down-line
+#   	} else {
+#        	zle history-substring-search-down
+#   	}
+#	}
+#	zle -N prefix-down-line-or-search
+#	bindkey '^[[B' prefix-down-line-or-search
+
+else
+	# bash
+	export HISTFILESIZE=5000  # 历史记录条数
+	export HISTSIZE=2000  # 显示历史记录条数
+	shopt -s histappend  # 退出时添加新记录而不是覆盖原文件
+	bind '"\e[A": history-search-backward'  # 绑定历史补全
+	bind '"\e[B": history-search-forward'
+	set show-all-if-ambiguous on # 补全时按最长匹配
+	set completion-ignore-case on # 补全时忽略大小写
+fi
+ 
+# 提示符配置 全局
+# default: export PROMPT="%n@%m %1~ %#"
+[ -f "/Users/config/prompt.sh" ] && . "/Users/config/prompt.sh"
