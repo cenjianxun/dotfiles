@@ -73,5 +73,5 @@ sudo-command-line() {
 	zle reset-prompt 
 }
 zle -N sudo-command-line
-bindkey "^B" sudo-command-line
+bindkey "^D" sudo-command-line
 
