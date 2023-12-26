@@ -1,5 +1,5 @@
 # 防止被加载两次
-echo "看看before: $_INIT_SH_LOADED"
+#echo "看看before: $_INIT_SH_LOADED"
 if [ -z "$_INIT_SH_LOADED" ]; then
 	_INIT_SH_LOADED=1
 else
