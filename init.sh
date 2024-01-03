@@ -1,3 +1,6 @@
+#!/bin/zsh
+echo "start init.sh ..."
+
 # 防止被加载两次
 #echo "看看before: $_INIT_SH_LOADED"
 if [ -z "$_INIT_SH_LOADED" ]; then
@@ -8,7 +11,7 @@ fi
 #echo "看看after: $_INIT_SH_LOADED"
 
 # 非交互式则退出
-[[ "$-" != *i* ]] && return
+#[[ "$-" != *i* ]] && exit
 
 #DOTDIR=/Users/dotfiles
 # 环境配置

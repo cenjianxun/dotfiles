@@ -1,9 +1,15 @@
-# 自动补全
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# 代码高亮
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# 前缀搜索
-source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+#!/bin/zsh
+
+# 自动补全 代码高亮 前缀搜索
+needPackages=(zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search)
+for pkg in "${needPackages[@]}"; do
+	if ! brew ls --versions "$pkg" > /dev/null; then
+		echo "Installing $pkg..."
+		brew install "$pkg"
+	fi
+	# 直接给path赋值的话，报错很危险。恢复默认值：export PATH=/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+	source "$(brew --prefix)/share/$pkg/$pkg.zsh"
+done
 
 # zsh设置用setopt，关掉用unsetopt
 # 删除keymaps：bindkey -d；
