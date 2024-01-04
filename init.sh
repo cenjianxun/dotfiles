@@ -1,4 +1,3 @@
-#!/bin/zsh
 echo "start init.sh ..."
 
 # 防止被加载两次

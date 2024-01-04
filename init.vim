@@ -59,6 +59,11 @@ set laststatus=2  " 0:不显示状态行；1:多于一个窗口显示；2:总显
 " 缓冲区号 文件名 行数 修改 帮助 只读 编码 换行符 BOM ======== 字符编码 位置 百分比位置
 set statusline=%n\ %<%f\ %LL\ %{&modified?'[+]':&modifiable\|\|&ft=~'^\\vhelp\|qf$'?'':'[-]'}%h%r%{&fenc=='utf-8'\|\|&fenc==''?'':'['.&fenc.']'}%{&ff=='unix'?'':'['.&ff.']'}%{&bomb?'[BOM]':''}%{&eol?'':'[noeol]'}%=\ 0x%-4.8B\ \ \ \ %-14.(%l,%c%V%)\ %P
 
+" 打开vim, 自动定位到上次最后变更位置
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
 " 设置代码折叠
 if has('folding')
 	set foldenable  " 允许代码折叠
@@ -107,6 +112,8 @@ if has("macunix")
 	noremap <C-Left> 0
 	noremap <A-Right> w
 	noremap <C-Right> $
+	noremap <C-Up> <C-u>  " 向上半屏
+	noremap <C-Down> <C-d>  " 向下半屏
 	noremap <A-Backspace> bX
 	noremap <C-Backspace> dd
 "else

@@ -28,9 +28,19 @@ if which zsh >/dev/null; then
     fi
 fi
 
+# vim
 if [ ! -e "$HOME/.vimrc" ] || ! grep -q "init.vim" "$HOME/.vimrc"; then
 	echo 'let g:bundle_group = ["simple"]' >> ~/.vimrc
 	echo 'so '$DOTDIR'/init.vim' >> ~/.vimrc
 fi
 
+# git
+if [ ! -e "$HOME/.gitconfig"]; then
+	echo "install git ..."
+	# todo 要可选吗？分系统类型
+	brew install git
+fi
+if ! grep -qFf gitconfig $HOME/.gitconfig; then
+	cat gitconfig >> $HOME/.gitconfig
+fi
 "$DOTDIR/init.sh"
