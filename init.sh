@@ -1,4 +1,5 @@
-echo "start init.sh ..."
+# echo "start init.sh ..."
+# start=$(python -c 'import time; print(time.time())')
 
 # 防止被加载两次
 #echo "看看before: $_INIT_SH_LOADED"
@@ -43,3 +44,7 @@ if [ -n "$ZSH_VERSION" ]; then
 else
 	[ -f "$HOME/.bashrc"  ] && . "$HOME/.bashrc"
 fi
+
+# end=$(python -c 'import time; print(time.time())')
+# timeTaken=$(echo "$end - $start" | bc)
+# echo "init运行时间：$timeTaken s"

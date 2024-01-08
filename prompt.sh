@@ -1,4 +1,4 @@
-echo "set prompt.sh ..."
+# echo "set prompt.sh ..."
 
 # todo:显示后台进程个数
 
@@ -9,7 +9,7 @@ echo "set prompt.sh ..."
 lastState=$?
 
 # 非交互返回
-[[ $- != *i* ]] && return
+[[ $- != *i* ]] && exit
 
 #isZsh=$(env | grep SHELL | grep -i "/zsh$")
 #isMac=$(uname | grep -i "Darwin")

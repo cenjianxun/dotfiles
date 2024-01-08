@@ -37,6 +37,7 @@ set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
 syntax on  " 语法高亮
 set nu!  " 显示行号
 set wrap  " 自动换行
+set scrolloff=5  " 上下移动光标时，光标的上方或下方至少会保留显示的行数
 set mouse=v " 开启鼠标 默认是a，设v可鼠标选中复制到寄存器；但是v不能鼠标点哪移哪
 set ai!  " 设置自动缩进
 set ruler  " 显示光标位置

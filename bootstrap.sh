@@ -1,4 +1,5 @@
 #第一行不能加shebang，因为此脚本内容需要判断当前环境
+startTime_s=`date +%s`
 echo "start bootstrap.sh ..."
 
 # 此脚本文件的绝对路径
@@ -43,4 +44,5 @@ fi
 if ! grep -qFf gitconfig $HOME/.gitconfig; then
 	cat gitconfig >> $HOME/.gitconfig
 fi
+
 "$DOTDIR/init.sh"

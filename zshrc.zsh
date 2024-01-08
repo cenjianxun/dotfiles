@@ -1,14 +1,18 @@
 #!/bin/zsh
 
+# echo "set zshrc.zsh .."
+# start=$(python -c 'import time; print(time.time())')
+
 # 自动补全 代码高亮 前缀搜索
 needPackages=(zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search)
+brewPrefix=$(brew --prefix)
 for pkg in "${needPackages[@]}"; do
-	if ! brew ls --versions "$pkg" > /dev/null; then
+	if ! source "$brewPrefix/share/$pkg/$pkg.zsh" 2> /dev/null; then
 		echo "Installing $pkg..."
 		brew install "$pkg"
+		# 直接给path赋值的话，报错很危险。恢复默认值：export PATH=/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+		source "$brewPrefix/share/$pkg/$pkg.zsh"
 	fi
-	# 直接给path赋值的话，报错很危险。恢复默认值：export PATH=/usr/bin:/bin:/usr/sbin:/sbin:$PATH
-	source "$(brew --prefix)/share/$pkg/$pkg.zsh"
 done
 
 # zsh设置用setopt，关掉用unsetopt
@@ -81,3 +85,6 @@ sudo-command-line() {
 zle -N sudo-command-line
 bindkey "^D" sudo-command-line
 
+# end=$(python -c 'import time; print(time.time())')
+# timeTaken=$(echo "$end - $start" | bc)
+# echo "zshrc.zsh运行时间：$timeTaken s"
