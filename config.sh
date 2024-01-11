@@ -78,11 +78,13 @@ if ! command -v go &>/dev/null; then
 fi
 
 if command -v go &>/dev/null; then
-	export GOROOT="$(brew --prefix golang)/libexec"  # go的安装环境，由brew决定
-	[ ! -d "$HOME/work/Go" ] && mkdir "$HOME/work/Go"
-	export GOPATH=$HOME/work/Go   # go的运行环境，工作地点，新建个
-	if [[ ":${PATH}:" != *"${GOROOT}/bin"* ]]; then
-		export PATH="$PATH:${GOROOT}/bin"
+	go env -w GO111MODULE=on
+	GOROOT=$(go env GOROOT)
+	export GOPATH="$(brew --prefix go)"
+	export GOBIN="${GOROOT}/bin"
+
+	if [[ ":${PATH}:" != *"${GOBIN}"* ]]; then
+		export PATH="$PATH:${GOBIN}"
 	fi
 	if [[ ":${PATH}:" != *"${GOPATH}/bin"* ]]; then
 		export PATH="$PATH:${GOPATH}/bin"
