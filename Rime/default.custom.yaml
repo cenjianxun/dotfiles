@@ -5,28 +5,34 @@ patch:
     - schema: luna_pinyin # 朙月拼音
     #- schema: double_pinyin_flypy
 
-  menu:
-    page_size: 9  # 候选字数 
-
   switcher:
     hotkeys:
       - F4
       - Alt+grave
-    save_options:
-      - full_shape
-      - ascii_punct
-      - simplification
-      - zh_hans
-      - emoji_suggestion
+    caption: 
+      "【设置菜单】"
 
+  menu:
+    page_size: 9  # 候选字数 
+
+  # ascii_composer:
+  # # `inline_ascii` 在输入框内插入英文。
+  # # `commit_text` 候选文字上屏并切换至英文。
+  # # `commit_code` 输入拼音上屏并切换至英文。
+  # # `clear` 清除拼音并切换至英文。
+  # # `noop` 屏蔽此按键。
+  #   # 设置按左shift键上屏并切换到英文输入状态
+  #   switch_key/Shift_L: commit_code
+  #   # 设置按右shift键上屏并切换到英文输入状态
+  #   switch_key/Shift_R: commit_code
+  
   key_binder:
     bindings:
-      - { when: has_menu, accept: minus, send: Page_Up }
-      - { when: has_menu, accept: equal, send: Page_Down }
-      - { when: composing, accept: bracketleft, send: Left } # Tab 移动光标向左
-      - { when: composing, accept: bracketright, send: Right }
-      - {accept: "Control+space", toggle: full_shape, when: always}
-      - {accept: "Control+f", toggle: simplification, when: always}
-      - {accept: "Control+Shift+grave", send: "Deploy",when: always}
+      - { accept: equal, send: Page_Down, when: has_menu }  # Tab 向下翻页
+      - { accept: minus, send: Page_Up, when: has_menu }  # Shift + Tab 向上翻页
+      - { accept: bracketleft, send: Left, when: composing }  #  向左选择候选词
+      - { accept: bracketright, send: Right, when: composing }  # 向右选择候选词
+      - { accept: Control+space, toggle: full_shape, when: always }  # 全角/半角切换
+      - { accept: Control+f, toggle: simplification, when: always }  # 繁简体切换
 
   # recognizer/patterns/reverse_lookup: {}
