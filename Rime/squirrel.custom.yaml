@@ -1,0 +1,67 @@
+# ~/Library/Rime/squirrel.custom.yaml
+
+patch:
+  # 修改程序外观
+  style:
+    horizontal: true      # 候选词是否横排
+    #preset_color_schemes/apathy/horizontal: false   # 这条才能覆盖预定义主题 apathy 中的配置
+    #font_face: Hei      # 字体
+    font_point: 16         # 候选词大小
+    inline_preedit: false   # 輸入碼內嵌
+    color_scheme: clean_white #lost_temple #clean_white    # 在./build/squirrel.yaml里
+
+  app_options:
+    com.googlecode.iterm2:
+      ascii_mode: true
+    com.sublimetext.3:
+      ascii_mode: true
+    com.microsoft.VSCode:
+      ascii_mode: true
+    
+  preset_color_schemes:
+    Bamboo:
+      name: "雪中竹林"
+      author: "Yiming <yiming.ma.cv@outlook.com>"
+      back_color: "0xF9FEFF" # 雪白
+      text_color: "0x35404A" # 鹤灰
+      hilited_text_color: "0xF9FEFF" # 雪白
+      hilited_back_color: "0x748B6E" # 瓦松绿
+      hilited_candidate_text_color: "0xF9FEFF" # 雪白
+      hilited_candidate_back_color: "0x84A71B" # 竹绿
+      hilited_candidate_label_color: "0xF9FEFF" # 雪白
+      hilited_comment_text_color: "0xF9FEFF" # 雪白
+      candidate_text_color: "0x333436" # 长石灰
+      label_color: "0x728091" # 银灰
+      comment_text_color: "0x6E7680" # 雁灰
+
+    ForbiddenCity:
+      name: "雪中故宫"
+      author: "Yiming <yiming.ma.cv@outlook.com>"
+      back_color: "0xF9FEFF" # 雪白
+      border_color: "0x728091" # 银灰
+      text_color: "0x826E12" # 玉鈫蓝
+      hilited_text_color: "0x172686" # 赭石
+      hilited_back_color: "0xF9FEFF" # 雪白
+      hilited_candidate_text_color: "0x172686" # 赭石
+      hilited_candidate_back_color: "0xF9FEFF" # 雪白
+      hilited_candidate_label_color: "0x172686" # 赭石
+      hilited_comment_text_color: "0x172686" # 赭石
+      candidate_text_color: "0x826E12" # 玉鈫蓝
+      label_color: "0x826E12" # 玉鈫蓝
+      comment_text_color: "0x826E12" # 玉鈫蓝
+
+    NightMountain:
+      name: "夜间山林"
+      author: "Yiming <yiming.ma.cv@outlook.com>"
+      back_color: "0x241113" # 暗蓝紫
+      border_color: "0x402A4E" # 龙睛鱼紫
+      text_color: "0xC9DEB9" # 竹篁绿
+      hilited_text_color: "0xF2F7EE" # 月白
+      hilited_back_color: "0x241113" # 暗蓝紫
+      hilited_candidate_text_color: "0xF2F7EE" # 月白
+      hilited_candidate_back_color: "0x241113" # 暗蓝紫
+      hilited_candidate_label_color: "0xF2F7EE" # 月白
+      hilited_comment_text_color: "0xF2F7EE" # 月白
+      candidate_text_color: "0xC2C357" # 石绿
+      label_color: "0xC2C357" # 石绿
+      comment_text_color: "0xC2C357" # 石绿

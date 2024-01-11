@@ -79,6 +79,8 @@ fi
 
 if command -v go &>/dev/null; then
 	go env -w GO111MODULE=on
+	export GOPROXY=https://goproxy.cn,direct
+	
 	GOROOT=$(go env GOROOT)
 	export GOPATH="$(brew --prefix go)"
 	export GOBIN="${GOROOT}/bin"

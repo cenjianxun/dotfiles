@@ -1,0 +1,32 @@
+# ~/Library/Rime/luna_pinyin.custom.yaml
+
+patch:
+  switches:
+    - name: ascii_mode
+      reset: 0
+      states: [ 中文, 西文 ]
+    - name: full_shape
+      states: [ 半角, 全角 ]
+    - name: simplification
+      reset: 1
+      states: [ 漢字, 汉字 ]
+    - name: ascii_punct
+      states: [ 。，, ．， ]
+  # "switches/@2/reset": 1
+
+  recognizer:
+    patterns:
+      reverse_lookup: {}
+      punct: "^;([0-9]0?|[A-Za-z]+)$"
+
+  # punctuator:
+  #   import_preset: symbols
+  #   symbols:
+  #     "/fh": [⌘, ⌥, ⇧, ⌃, ⎋, ⇪, , ↑, ↓, ←, →, ↖, ↘, ♂, ♀]
+  #     "/dc": ["√","✔","✕","✖"]
+  #   full_shape:
+  #     "#": "#"
+  #     "`": "`" 
+  #   half_shape: 
+  #     "#": "#"
+  #     "`": "`" 

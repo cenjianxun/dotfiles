@@ -1,0 +1,32 @@
+# ~/Library/Rime/default.custom.yaml
+
+patch:
+  schema_list:
+    - schema: luna_pinyin # 朙月拼音
+    #- schema: double_pinyin_flypy
+
+  menu:
+    page_size: 9  # 候选字数 
+
+  switcher:
+    hotkeys:
+      - F4
+      - Alt+grave
+    save_options:
+      - full_shape
+      - ascii_punct
+      - simplification
+      - zh_hans
+      - emoji_suggestion
+
+  key_binder:
+    bindings:
+      - { when: has_menu, accept: minus, send: Page_Up }
+      - { when: has_menu, accept: equal, send: Page_Down }
+      - { when: composing, accept: bracketleft, send: Left } # Tab 移动光标向左
+      - { when: composing, accept: bracketright, send: Right }
+      - {accept: "Control+space", toggle: full_shape, when: always}
+      - {accept: "Control+f", toggle: simplification, when: always}
+      - {accept: "Control+Shift+grave", send: "Deploy",when: always}
+
+  # recognizer/patterns/reverse_lookup: {}
