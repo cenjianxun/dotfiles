@@ -1,14 +1,13 @@
 # ~/Library/Rime/squirrel.custom.yaml
 
 patch:
-  # 修改程序外观
-  style:
+  style:  # 修改程序外观
     horizontal: true      # 候选词是否横排
     #preset_color_schemes/apathy/horizontal: false   # 这条才能覆盖预定义主题 apathy 中的配置
     #font_face: Hei      # 字体
-    font_point: 16         # 候选词大小
+    font_point: 15         # 候选词大小
     inline_preedit: false   # 輸入碼內嵌
-    color_scheme: clean_white #lost_temple #clean_white    # 在./build/squirrel.yaml里
+    color_scheme: clean_white  #lost_temple #clean_white     
 
   app_options:
     com.googlecode.iterm2:
