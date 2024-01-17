@@ -5,7 +5,10 @@
 RIME_PATH="/Users/liukun/Library/Rime"
 
 if [ "$1" == "up" ]; then
-	cp $RIME_PATH/*.yaml .
+	cp $PATH/default.custom.yaml .
+	cp $PATH/symbols.yaml .
+	cp $PATH/squirrel.custom.yaml .
+	cp $PATH/luna_pinyin.custom.yaml .
 fi
 
 if [ "$1" == "down" ]; then
