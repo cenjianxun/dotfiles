@@ -9,6 +9,7 @@ patch:
     inline_preedit: false   # 輸入碼內嵌
     color_scheme: clean_white  #lost_temple #clean_white     
 
+
   app_options:
     com.googlecode.iterm2:
       ascii_mode: true
@@ -16,7 +17,8 @@ patch:
       ascii_mode: true
     com.microsoft.VSCode:
       ascii_mode: true
-    
+
+
   preset_color_schemes:
     Bamboo:
       name: "雪中竹林"

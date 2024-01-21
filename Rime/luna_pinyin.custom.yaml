@@ -12,8 +12,10 @@ patch:
       states: ["漢字", "汉字"]
     - name: ascii_punct
       states: ["。，", "．，"]
-    
+
   # "switches/@2/reset": 1
+
+  recognizer/patterns/reverse_lookup: {}
 
   recognizer:
     patterns:

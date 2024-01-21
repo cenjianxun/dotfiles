@@ -2,13 +2,13 @@
 # bash sync.sh up 是local改了传到dotfiles
 # bash sync.sh down 是dotfiles给local
 
-RIME_PATH="/Users/liukun/Library/Rime"
+RIME_PATH="$HOME/Library/Rime"
 
 if [ "$1" == "up" ]; then
-	cp $PATH/default.custom.yaml .
-	cp $PATH/symbols.yaml .
-	cp $PATH/squirrel.custom.yaml .
-	cp $PATH/luna_pinyin.custom.yaml .
+	cp $RIME_PATH/default.custom.yaml .
+	cp $RIME_PATH/symbols.yaml .
+	cp $RIME_PATH/squirrel.custom.yaml .
+	cp $RIME_PATH/luna_pinyin.custom.yaml .
 fi
 
 if [ "$1" == "down" ]; then
