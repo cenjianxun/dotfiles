@@ -28,11 +28,19 @@ patch:
   
   key_binder:
     bindings:
-      - { accept: equal, send: Page_Down, when: has_menu }  # Tab 向下翻页
-      - { accept: minus, send: Page_Up, when: has_menu }  # Shift + Tab 向上翻页
-      - { accept: bracketleft, send: Left, when: composing }  #  向左选择候选词
-      - { accept: bracketright, send: Right, when: composing }  # 向右选择候选词
+      # "ISO_Left_Tab"，一般对应"Shift+Tab"
+      # "select: .next"，表示选择下一个候选项。原来是切换输入法用的。
+      # when: has_menu，只有当候选词菜单显示时才会触发
+      # when: composing，只有当用户正在输入时才会触发
+      # page_up和up，目前我都是单行，所以没啥区别
+      - { accept: equal, send: Down, when: has_menu }  # = 向下翻页
+      - { accept: minus, send: Up, when: has_menu }  # -向上翻页
+      - { accept: bracketleft, send: Left, when: composing }  # 【 向左选择候选词
+      - { accept: bracketright, send: Right, when: composing }  # 】向右选择候选词
       - { accept: Control+space, toggle: full_shape, when: always }  # 全角/半角切换
       - { accept: Control+f, toggle: simplification, when: always }  # 繁简体切换
+      - { accept: Tab, send: Right, when: has_menu }  # 多设tab向右选候选词
+      - { accept: Shift+Tab, send: Left, when: has_menu }  # shift+tab向左选候选词          
+      - { accept: ISO_Left_Tab, send: Left, when: has_menu }  # 不知道为啥没效果
 
   # recognizer/patterns/reverse_lookup: {}
