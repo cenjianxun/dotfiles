@@ -15,6 +15,7 @@ esac
 
 alias ll='ls -lh'
 alias grep='grep --color=tty'
+alias kf='bash $DOTDIR/auto-bot/kill_process.sh'
 
 # default editor
 #export EDITOR=vim
@@ -57,8 +58,9 @@ if ! command -v python3 &>/dev/null; then
 fi
 
 if command -v python3 &>/dev/null; then
-	alias python=python3
-	alias pip=pip3
+	# 因为nohup不能识别alias，所以这里只能用ln，将python3的路径给python
+	ln -s $(which python3) /usr/local/bin/python
+	ln -s $(which pip3) /usr/local/bin/python
 fi
 #alias python="/opt/homebrew/bin/python3.10"
 #alias pip="/opt/homebrew/bin/pip3.10"
