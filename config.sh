@@ -16,6 +16,7 @@ esac
 alias ll='ls -lh'
 alias grep='grep --color=tty'
 alias kf='bash $DOTDIR/auto-bot/kill_process.sh'
+alias runpy='bash $DOTDIR/auto-bot/nohup-tail.sh'
 
 # default editor
 #export EDITOR=vim
@@ -57,11 +58,12 @@ if ! command -v python3 &>/dev/null; then
 	esac
 fi
 
-if command -v python3 &>/dev/null; then
-	# 因为nohup不能识别alias，所以这里只能用ln，将python3的路径给python
+if command -v python3 &>/dev/null && [ ! -e /usr/local/bin/python ]; then
+	# 因为nohup不能识别alias，所以这里只能用ln，将python3的路径给python。且只用运行一次。
 	ln -s $(which python3) /usr/local/bin/python
-	ln -s $(which pip3) /usr/local/bin/python
+	ln -s $(which pip3) /usr/local/bin/pip
 fi
+
 #alias python="/opt/homebrew/bin/python3.10"
 #alias pip="/opt/homebrew/bin/pip3.10"
 
