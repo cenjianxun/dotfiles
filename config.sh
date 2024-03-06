@@ -35,6 +35,8 @@ HISTFILESIZE=5000
 # install & alias
 #----------------------------------------
 
+# 本来判断软件如果没安装就自动安装，结果不需要安装的地方每次都跳出来问要不要安装。还是全注释掉，没安装就不管，安装了再设置。
+
 if [[ `uname` == "Darwin" ]]; then
 	#check="brew list"
 	download="brew"
@@ -42,23 +44,27 @@ else
 	#check="rpm -qa"
 	download="yum"
 fi
+
 # 本来检查是否安装命令是 $check ｜ grep -qw python3, 不如下面这个通用，改了。
 
-# python
-if ! command -v python3 &>/dev/null; then
-	printf "%s" "python3 is not installed. Do you want to install it? (y/n)"
-	read choice
-	case "$choice" in
-		y|Y )
-			$download install python #&
-			#wait $!
-			echo "python version $(python --version) is already installed."
-			;;
-		#* ) echo "python installation skipped.";;
-	esac
-fi
+# ————
 
-if command -v python3 &>/dev/null && [ ! -e /usr/local/bin/python ]; then
+# python
+# if ! command -v python3 &>/dev/null; then
+# 	printf "%s" "python3 is not installed. Do you want to install it? (y/n)"
+# 	read choice
+# 	case "$choice" in
+# 		y|Y )
+# 			$download install python #&
+# 			#wait $!
+# 			echo "python version $(python --version) is already installed."
+# 			;;
+# 		#* ) echo "python installation skipped.";;
+# 	esac
+# fi
+
+# -w 判断这个path本用户有没有权限。因为lab的server咱没有root权限
+if command -v python3 &>/dev/null && [ ! -e /usr/local/bin/python ] && [ -w "/usr/local/bin" ]; then
 	# 因为nohup不能识别alias，所以这里只能用ln，将python3的路径给python。且只用运行一次。
 	ln -s $(which python3) /usr/local/bin/python
 	ln -s $(which pip3) /usr/local/bin/pip
@@ -68,18 +74,18 @@ fi
 #alias pip="/opt/homebrew/bin/pip3.10"
 
 # Go
-if ! command -v go &>/dev/null; then
-	printf "%s" "Golang is not installed. Do you want to install it? (y/n)"
-	read choice
-	case "$choice" in
-		y|Y )
-			$download install go #&
-			# wait $!
-			echo "$(go version) is already installed."
-			;;
-		#* ) echo "Golang installation skipped.";;
-	esac
-fi
+# if ! command -v go &>/dev/null; then
+# 	printf "%s" "Golang is not installed. Do you want to install it? (y/n)"
+# 	read choice
+# 	case "$choice" in
+# 		y|Y )
+# 			$download install go #&
+# 			# wait $!
+# 			echo "$(go version) is already installed."
+# 			;;
+# 		#* ) echo "Golang installation skipped.";;
+# 	esac
+# fi
 
 if command -v go &>/dev/null; then
 	go env -w GO111MODULE=on
