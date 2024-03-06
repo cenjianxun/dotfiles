@@ -25,5 +25,4 @@ bootstrap.sh
           ├── config.sh  
           ├── prompt.sh  
           └── zshrc.zsh / 或bash的专门配置（还没写）  
-    ├── .gitconfig  
     └── init.vim  

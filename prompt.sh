@@ -39,7 +39,7 @@ function _get_head() {
 		if [[ `uname` == "Darwin" ]]; then
 			[ $preStatus -eq 0 ] && echo "\[\e[1;33m\]${head}\[\e[0m\]" || echo "\[\e[1;31m\]${head}\[\e[0m\]"
 		else
-			[ $preStatus -eq 0 ] && echo "\[\e[1;33m\]\u\[\e[0m\]\[\e[1;32m\]@\[\e[0m\]\[\e[1;33m\]${ipStr}\[\e[0m\] " || echo "\[\e[1;33m\]\u\[\e[0m\]\[\e[1;31m\]@\[\e[0m\]\[\e[1;33m\]${ipStr}\[\e[0m\] "
+			[ $preStatus -eq 0 ] && echo "\[\e[38;5;229m\]\u\[\e[0m\]\[\e[1;38;5;153m\]@\[\e[0m\]\[\e[38;5;229m\]${ipStr}\[\e[0m\] " || echo "\[\e[38;5;229m\]\u\[\e[0m\]\[\e[1;38;5;124m\]@\[\e[0m\]\[\e[38;5;229m\]${ipStr}\[\e[0m\] "
 		fi
 	fi
 }
