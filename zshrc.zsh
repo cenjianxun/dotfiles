@@ -62,6 +62,7 @@ bindkey '^[^?' backward-kill-line  # [ctrl-backspace] ^[[3;3~
 # push-line，当输入一半命令的时候想输入其他命令
 bindkey "\eq" push-line-or-edit
 
+# 上下键前缀搜索历史
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search

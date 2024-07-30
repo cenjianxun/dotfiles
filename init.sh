@@ -1,4 +1,4 @@
-# echo "start init.sh ..."
+#echo "start init.sh ..."
 # start=$(python -c 'import time; print(time.time())')
 
 # 防止被加载两次
@@ -42,7 +42,7 @@ export PATH
 if [ -n "$ZSH_VERSION" ]; then
 	. "$DOTDIR/zshrc.zsh"
 else
-	[ -f "$HOME/.bashrc"  ] && . "$HOME/.bashrc"
+	. "$DOTDIR/bashrc.bash"
 fi
 
 # end=$(python -c 'import time; print(time.time())')
