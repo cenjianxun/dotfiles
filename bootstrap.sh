@@ -7,7 +7,7 @@ DOTFILE=$(readlink -f $0)
 # 此脚本文件所在文件夹的绝对路径
 DOTDIR=$(dirname $DOTFILE)
 # 注意：这两行要分开写，不要合并成一句，否则变量内容为空。
-echo $DOTDIR
+echo "DOTDIR 路径：$DOTDIR"
 
 # 不知道为什么if [ -n "$BASH_VERSION" ]不行，它和$ZSH_VERSION都为空。因此使用其他方式判断
 # 另外这里改一下判断条件，注意“本机安装了zsh”和“当前环境为zsh”是不同的。这里改用“本机安装”当条件吧
@@ -36,11 +36,12 @@ if [ ! -e "$HOME/.vimrc" ] || ! grep -q "init.vim" "$HOME/.vimrc"; then
 fi
 
 # git
-if [ ! -e "$HOME/.gitconfig"]; then
+if [ ! -e "$HOME/.gitconfig" ]; then
 	echo "install git ..."
 	# todo 要可选吗？分系统类型
 	brew install git
 fi
+
 if ! grep -qFf gitconfig $HOME/.gitconfig; then
 	cat gitconfig >> $HOME/.gitconfig
 fi

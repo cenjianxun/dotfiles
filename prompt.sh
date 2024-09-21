@@ -2,11 +2,13 @@
 
 # todo:显示后台进程个数
 
-##########################
-# 此命令一定要放最开始
-#########################
-# 上个命令的返回值要放到最开始最外面不然中间它会改
-lastState=$?
+# 测试颜色：echo -e "\e[1;31mHello World\e[0m"
+# 其他格式：
+# 8-bit: \e[38;5;N，N是0-255之间的值；bold: \e[1;38;5;N]
+# 24-bit: \e[38;2;R;G;B;
+# zsh不需要ansi转义，%B表示bold，%F表示前景色
+
+##################
 
 # 非交互返回
 [[ $- != *i* ]] && exit
@@ -16,19 +18,32 @@ lastState=$?
 #OS=${$(uname)%_*} # 也可以用 [[ $OS == "Darwin" ]]判断，linux是“CYGWIN”和“MSYS”
 
 function _get_head() {
-	local ipStr=$(ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print $2}')
+	# 上个命令的返回值要放到函数内部的开头，不然它始终不变
+	local preStatus=$?
+
 	if [[ `uname` == "Darwin" ]]; then
     		head=""
 	else
-		head="\u@${ipStr}"
+		# ip是linux用法，如果是macOS，`ip addr show `换成`ifconfig`
+		ipStr=$(ip addr show | grep 'inet ' | grep -v 127.0.0.1 | awk 'NR==1 {print $2}' | awk -F'/' '{print $1}')
+		# head="\u@${ipStr}"
 	fi
 	if [ -n "$ZSH_VERSION" ]; then
-		echo -n "%(?.%B%F{Yellow}${head}%f%b.%B%F{88}${head}%f%b) "
+		if [[ `uname` == "Darwin" ]]; then
+			echo -n "%(?.%B%F{Yellow}${head}%f%b.%B%F{88}${head}%f%b) "
+		else
+			echo -n "%B%F{Yellow}\u%f%b%(?.%B%F{Yellow}@%f%b.%B%F{88}@%f%b)%B%F{Yellow}${ipStr}%f%b "
+		fi
 	else
-		#echo $lastState
-		[ $lastState -eq 0 ] && echo "\[\e[1;33m\]${head}\[\e[0m\] " || echo "\[\e[0;31m\]${head}\[\e[0m\] "
+		#echo $preStatus
+		if [[ `uname` == "Darwin" ]]; then
+			[ $preStatus -eq 0 ] && echo "\[\e[1;33m\]${head}\[\e[0m\]" || echo "\[\e[1;31m\]${head}\[\e[0m\]"
+		else
+			[ $preStatus -eq 0 ] && echo "\[\e[38;5;229m\]\u\[\e[0m\]\[\e[1;38;5;153m\]@\[\e[0m\]\[\e[38;5;229m\]${ipStr}\[\e[0m\] " || echo "\[\e[38;5;229m\]\u\[\e[0m\]\[\e[1;38;5;124m\]@\[\e[0m\]\[\e[38;5;229m\]${ipStr}\[\e[0m\] "
+		fi
 	fi
 }
+
 
 function _get_pwd() {
 	local shortPwd=$(pwd | sed "s|$HOME|~|" | sed "s:\([^/]\)[^/]*/:\1/:g")
@@ -68,7 +83,7 @@ function _get_git_branch() {
         if [ -n "$ZSH_VERSION" ]; then
         	echo "%B%F{blue}[%f%b%F{15}${branch}%f%B%F{blue}]%f%b "
         else
-        	echo "\[\e[1;32m\][\[\e[0m\]\[\e[1;37m\]${branch}[\e[0m\]\[\e[1;32m\]]\[\e[00m\] "
+        	echo "\[\e[1;32m\][\[\e[0m\]\[\e[1;37m\]${branch}\e[0m\]\[\e[1;32m\]]\[\e[00m\] "
         fi
         # return 0
     fi
@@ -85,18 +100,18 @@ if [ -n "$ZSH_VERSION" ]; then
 	setopt PROMPT_SUBST
 	setopt transient_rprompt # 清除旧右提示符，方便复制
 	# 这里%B就直接转到大写颜色那列了，%K的意思是将该颜色设为背景色而不是字本身
-	export PROMPT='$(_get_head)$(_get_pwd)$(_get_git_branch)%(!.# .» )'
+	export PROMPT='$(_get_head)$(_get_pwd)$(_get_git_branch)%B%F{Yellow}%(!.# .» )%f%b'
 	export RPROMPT='%(?.%F{white}%*%f.%F{red}%*%f)'
 else
 	function build_prompt() {
-		# [0;42]是直接把颜色设置成背景色，而不是选light版本的颜色
-		# [1;32m]才是设为light版本，格式：/033[特殊格式;字体颜色;背景颜色 m
+
+		# root变色参考：
+		# PS1='$(if [[ $? == 0 ]]; then echo "\[\e[1;32m\]:) "; else echo "\[\e[1;31m\]:( "; fi)$(if [[ ${EUID} == 0 ]]; then echo "\[\e[1;31m\]\u "; else echo "\[\e[1;36m\]\u "; fi)$(echo "\[\e[1;32m\]\w ")$(if [[ -d .git ]]; then echo "\[\e[1;33m\](`git status | head -n 1 | grep -o "\b\S*$"`) "; fi)$(if [[ ${EUID} == 0 ]]; then echo "\[\e[1;31m\]\$ "; else echo "\[\e[1;36m\]\$ "; fi)\[\e[0m\]'
+
 		PS1=$(_get_head)
 		PS1+='\[\e[1;32m\]\w\[\e[0m\] '
 		PS1+=$(_get_git_branch)
 		PS1+='\[\e[1;33m\]\$\[\e[0m\] '
-		# root变色参考：
-		# PS1='$(if [[ $? == 0 ]]; then echo "\[\e[1;32m\]:) "; else echo "\[\e[1;31m\]:( "; fi)$(if [[ ${EUID} == 0 ]]; then echo "\[\e[1;31m\]\u "; else echo "\[\e[1;36m\]\u "; fi)$(echo "\[\e[1;32m\]\w ")$(if [[ -d .git ]]; then echo "\[\e[1;33m\](`git status | head -n 1 | grep -o "\b\S*$"`) "; fi)$(if [[ ${EUID} == 0 ]]; then echo "\[\e[1;31m\]\$ "; else echo "\[\e[1;36m\]\$ "; fi)\[\e[0m\]'
 }
 	PROMPT_COMMAND=build_prompt
 fi
