@@ -1,5 +1,9 @@
-#echo "start init.sh ..."
+echo "start init.sh ..."
 # start=$(python -c 'import time; print(time.time())')
+# 好像不能跨文件共享变量
+DOTFILE=$(readlink -f $0)
+DOTDIR=$(dirname $DOTFILE)
+# echo "DOTDIR 路径：$DOTDIR"
 
 # 防止被加载两次
 #echo "看看before: $_INIT_SH_LOADED"
@@ -39,9 +43,10 @@ fi
 export PATH
 
 # 手边没有sh，先配zsh吧
-if [ -n "$ZSH_VERSION" ]; then
+if which zsh >/dev/null; then
 	. "$DOTDIR/zshrc.zsh"
-else
+fi
+if  which bash >/dev/null; then
 	. "$DOTDIR/bashrc.bash"
 fi
 
