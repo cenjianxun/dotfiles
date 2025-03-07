@@ -1,4 +1,4 @@
-echo "start init.sh ..."
+# echo "start init.sh ..."
 # start=$(python -c 'import time; print(time.time())')
 # 好像不能跨文件共享变量
 DOTFILE=$(readlink -f $0)
@@ -45,8 +45,7 @@ export PATH
 # 手边没有sh，先配zsh吧
 if which zsh >/dev/null; then
 	. "$DOTDIR/zshrc.zsh"
-fi
-if  which bash >/dev/null; then
+else
 	. "$DOTDIR/bashrc.bash"
 fi
 
