@@ -88,4 +88,4 @@ bindkey "^D" sudo-command-line
 
 # end=$(python -c 'import time; print(time.time())')
 # timeTaken=$(echo "$end - $start" | bc)
-# echo "zshrc.zsh运行时间：$timeTaken s"
+# echo "zshrc.zsh运行时间：$timeTaken s"	}

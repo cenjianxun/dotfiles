@@ -11,7 +11,7 @@
 ##################
 
 # 非交互返回
-[[ $- != *i* ]] && exit
+[[ $- != *i* ]] && return
 
 #isZsh=$(env | grep SHELL | grep -i "/zsh$")
 #isMac=$(uname | grep -i "Darwin")
